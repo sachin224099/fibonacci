@@ -1,5 +1,6 @@
 package com.example.fibonacci.fibonacci.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "FIBONACCI")
 @Data
+@Builder
 public class Fibonacci {
 
     @Id
