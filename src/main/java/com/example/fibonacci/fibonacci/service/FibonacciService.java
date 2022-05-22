@@ -1,7 +1,11 @@
 package com.example.fibonacci.fibonacci.service;
 
-import com.example.fibonacci.fibonacci.entity.Fibonacci;
-
+/**
+ * Service to list all operation related to fibonacci series.
+ * @author vishal
+ *
+ */
 public interface FibonacciService {
-    public Fibonacci generateAndGetFibonacci(Long n);
+    public long getFibonacciNumber(int n);
+    public int getMostAccessedNumber(int position);
 }
