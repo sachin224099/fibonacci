@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.5.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> 
 	</parent>
 	<groupId>com.example.fibonacci</groupId>
 	<artifactId>fibonacci</artifactId>
@@ -15,7 +15,7 @@
 	<description>fibonacci REST API</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<docker.image.prefix>spring-boot-tutorialspoint</docker.image.prefix>
+		<docker.image.prefix>fibonacci</docker.image.prefix>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,34 +63,12 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-	            <groupId>com.spotify</groupId>
-	            <artifactId>docker-maven-plugin</artifactId>
-	            <version>1.0.0</version>
-	            
-	            <configuration>
-	               <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-	               <dockerDirectory>src/main/docker</dockerDirectory>
-	               <resources>
-	                  <resource>
-	                     <directory>${project.build.directory}</directory>
-	                     <include>${project.build.finalName}.jar</include>
-	                  </resource>
-	               </resources>
-	            </configuration>
-	         </plugin>
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.1.5.RELEASE</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -99,6 +77,14 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>									
+			    <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>
