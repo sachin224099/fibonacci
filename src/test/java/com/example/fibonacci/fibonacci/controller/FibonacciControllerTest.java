@@ -1,38 +1,40 @@
 package com.example.fibonacci.fibonacci.controller;
 
-import com.example.fibonacci.fibonacci.service.FibonacciService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FibonacciController.class)
-class FibonacciControllerTest {
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
-    @Autowired
-    private MockMvc mockMvc;
+import com.example.fibonacci.fibonacci.service.FibonacciService;
 
-    @MockBean
+@RunWith(MockitoJUnitRunner.class)
+public class FibonacciControllerTest {
+
+	@InjectMocks
+	FibonacciController controller;
+	
+    @Mock
     private FibonacciService fibonacciService;
 
+    @Before
+    public void init(){
+    	MockitoAnnotations.initMocks(this);
+    }
+    
     @Test
-    void getFibonacciTest() throws Exception {
+    public void getFibonacciTest() throws Exception {
         when(fibonacciService.getFibonacciNumber(6)).thenReturn(8L);
-        mockMvc.perform(get("/fibonacci/6")).andExpect(status().isOk())
-                .andExpect(jsonPath("$", is(8)));
+        controller.getFibonacci(6);
     }
 
     @Test
-    void getMostAccessedNumberTest() throws Exception {
+    public void getMostAccessedNumberTest() throws Exception {
         when(fibonacciService.getMostAccessedNumber(6)).thenReturn(8);
-        mockMvc.perform(get("/fibonacci/statistic/6")).andExpect(status().isOk())
-                .andExpect(jsonPath("$", is(8)));
+        controller.getMostAccessedNumber(6);
     }
 }
